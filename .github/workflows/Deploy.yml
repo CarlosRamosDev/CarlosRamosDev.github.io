@@ -1,0 +1,65 @@
+name: Deploy Preview
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: gh-pages
+          path: out/
+          retention-days: 1
+          
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download
+        uses: actions/download-artifact@v3
+        with:
+          name: gh-pages
+
+      - name: Git init
+        run: git init
+
+      - name: Git Config
+        run: |
+          git config --global user.name "{{ github_actor }}"
+          git config --global user.email "{{ github_email }}"
+        env:
+          github_actor: ${{ github.actor }}
+          github_email: ${{ secrets.EMAIL }}
+
+      - name: Git remote
+        run: git remote add origin https://github.com/CarlosRamosDev/CarlosRamosDev.github.io.git
+
+      - name: Git add
+        run: git add .
+
+      - name: Git commit
+        run: git commit -m "update"
+
+      - name: Push
+        run: git push origin master:gh-pages --force
