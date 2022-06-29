@@ -49,6 +49,8 @@ jobs:
           git checkout gh-pages
           git rm -r *
           rm -r .github
+          rm .gitignore
+          rm .eslintrc.json
         env:
           github_actor: ${{ github.actor }}
           github_email: ${{ secrets.EMAIL }}
