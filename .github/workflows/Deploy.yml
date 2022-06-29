@@ -43,7 +43,8 @@ jobs:
         run: |
           git config --global user.name "{{ github_actor }}"
           git config --global user.email "{{ github_email }}"
-          git checkout tmp
+          git branch gh-pages
+          git checkout gh-pages
           git rm -r *
         env:
           github_actor: ${{ github.actor }}
