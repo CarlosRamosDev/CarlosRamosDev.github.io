@@ -39,27 +39,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.ACCESS_TOKEN }}
-          
+          ref: 'gh-pages'
+      
+      - name: Clean
+        run: rm !(/.git)
+
       - name: Download
         uses: actions/download-artifact@v3
         with:
           name: gh-pages
-
-      - name: Git init
-        run: git init
-
-      - name: Git Config
-        run: |
-          git config --global user.name "{{ github_actor }}"
-          git config --global user.email "{{ github_email }}"
-        env:
-          github_actor: ${{ github.actor }}
-          github_email: ${{ secrets.EMAIL }}
-
-      - name: Git remote
-        run: git remote add origin https://github.com/CarlosRamosDev/CarlosRamosDev.github.io.git
-
+          
       - name: Git add
         run: git add .
 
