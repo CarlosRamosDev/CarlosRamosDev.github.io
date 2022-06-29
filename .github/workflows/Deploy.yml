@@ -43,8 +43,8 @@ jobs:
 
       - name: Git Config
         run: |
-          git config --global user.name "{{ github_actor }}"
-          git config --global user.email "{{ github_email }}"
+          git config --global user.name "{{ $github_actor }}"
+          git config --global user.email "{{ $github_email }}"
           git branch gh-pages
           git checkout gh-pages
           git rm -r *
