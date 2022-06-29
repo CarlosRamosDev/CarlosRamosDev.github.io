@@ -48,6 +48,7 @@ jobs:
           git branch gh-pages
           git checkout gh-pages
           git rm -r *
+          rm -r .github
         env:
           github_actor: ${{ github.actor }}
           github_email: ${{ secrets.EMAIL }}
@@ -61,7 +62,7 @@ jobs:
         run: git add .
 
       - name: Git commit
-        run: git commit -m "update"
+        run: git commit -m "deploy page"
 
       - name: Push
         run: git push --set-upstream origin gh-pages --force
