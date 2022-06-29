@@ -43,9 +43,8 @@ jobs:
         run: |
           git config --global user.name "{{ github_actor }}"
           git config --global user.email "{{ github_email }}"
-          git checkout gh-pages
+          git checkout tmp
           git rm -r *
-
         env:
           github_actor: ${{ github.actor }}
           github_email: ${{ secrets.EMAIL }}
@@ -62,4 +61,4 @@ jobs:
         run: git commit -m "update"
 
       - name: Push
-        run: git push --force
+        run: git push origin tmp:gh-pages --force
