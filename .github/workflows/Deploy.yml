@@ -1,4 +1,4 @@
-name: Deploy Preview
+name: Update page
 
 on:
   push:
