@@ -36,6 +36,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Git init
+        run: git init
+
       - name: Download
         uses: actions/download-artifact@v3
         with:
@@ -54,7 +57,7 @@ jobs:
 
       - name: Git commit
         run: git commit -m "update"
-        
+
       - name: Checkout
         uses: actions/checkout@v3
 
