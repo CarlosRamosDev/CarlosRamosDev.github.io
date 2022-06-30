@@ -49,6 +49,7 @@ jobs:
           git checkout gh-pages
           git rm -r *
           rm -r .github
+          rm -r .idea
           rm .gitignore
           rm .eslintrc.json
         env:
