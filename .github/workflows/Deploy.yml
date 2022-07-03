@@ -45,13 +45,8 @@ jobs:
         run: |
           git config --global user.name "$github_actor"
           git config --global user.email "$github_email"
-          git branch gh-pages
-          git checkout gh-pages
+          git checkout --track origin/gh-pages
           git rm -r *
-          rm -r .github
-          rm -r .idea
-          rm .gitignore
-          rm .eslintrc.json
         env:
           github_actor: ${{ github.actor }}
           github_email: ${{ secrets.EMAIL }}
